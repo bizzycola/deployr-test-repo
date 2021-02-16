@@ -1,0 +1,9 @@
+{
+  "projects": [
+    {
+      "name": "NodeServer",
+      "workingDir": "NodeJS/Server/",
+      "dockerFile": "Dockerfile"
+    }
+  ]
+}
