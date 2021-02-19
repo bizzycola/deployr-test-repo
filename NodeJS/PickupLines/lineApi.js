@@ -1,5 +1,5 @@
 let lines = require('./data/pickupLines.json')
-console.log('lines: ', lines.length)
+let negLines = releaseEvents('./data/putdownLines.json');
 
 let page_size = 10;
 function getRand(min, max) {
@@ -31,5 +31,18 @@ module.exports = {
     },
     getPickupLines: (page) => {
         return lines.slice((page = -1) * page_size, page * page_size);
+    },
+
+    getRandomPutdownLine: () => {
+        var line = null;
+        var count = 0;
+        do {
+            line = lines[getRand(0, negLines.length)];
+
+            count++;
+            if(count > 5)
+                return {id: -1, line: "Sorry, we couldn't find you a pickup line! Perhas something broke?"};
+        } while(line == null);
+        return line;
     }
 }

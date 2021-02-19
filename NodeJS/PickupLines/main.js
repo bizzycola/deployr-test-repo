@@ -26,6 +26,13 @@ app.get('/line/random', (req, res) => {
     line: lineApi.getRandomPickupLine()
   })
 });
+app.get('/nline/random', (req, res) => {
+  res.send({
+    success: true,
+    line: lineApi.getRandomPutdownLine()
+  })
+});
+
 app.get('/text/line/random', (req, res) => {
   res.send(lineApi.getRandomPickupLine().line);
 })
