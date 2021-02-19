@@ -11,8 +11,13 @@ function getRand(min, max) {
 module.exports = {
     getRandomPickupLine: () => {
         var line = null;
+        var count = 0;
         do {
             line = lines[getRand(0, lines.length)];
+
+            count++;
+            if(count > 5)
+                return {id: -1, line: "Sorry, we couldn't find you a pickup line! Perhas something broke?"};
         } while(line == null);
         return line;
     },
