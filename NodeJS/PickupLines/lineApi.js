@@ -1,8 +1,11 @@
-let lines = require('../data/pickupLines.json')
+let lines = require('./data/pickupLines.json')
+console.log('lines: ', lines.length)
 
 let page_size = 10;
 function getRand(min, max) {
-    return Math.random() * (max - min) + min;
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 module.exports = {

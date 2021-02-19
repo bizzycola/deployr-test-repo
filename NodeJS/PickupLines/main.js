@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
   ]})
 })
 
-app.get('/line', (req, res) => {
+app.get('/line/random', (req, res) => {
   res.send({
     success: true,
     line: lineApi.getRandomPickupLine()
@@ -29,7 +29,7 @@ app.get('/line', (req, res) => {
 app.get('/line/:id', (req, res) => {
   res.send({
     success: true,
-    line: lineApi.getPickupLineById(res.params.id)
+    line: lineApi.getPickupLineById(req.params.id)
   })
 });
 
