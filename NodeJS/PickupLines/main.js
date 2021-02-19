@@ -6,8 +6,8 @@ const port = 3000
 app.get('/', (req, res) => {
   res.send({success: true, endpoints: [
     {
-      "Path": "/line",
-      "Description": "Eeturns a random pickup line"
+      "Path": "/line/random",
+      "Description": "Returns a random pickup line"
     },
     {
       "Path": "/line/{id}",
@@ -33,7 +33,7 @@ app.get('/line/:id', (req, res) => {
   })
 });
 
-app.get('lines', (req, res) => {
+app.get('/lines', (req, res) => {
   let page = (req.query.page) ? req.query.page: 1;
   res.send({
     success: true,
