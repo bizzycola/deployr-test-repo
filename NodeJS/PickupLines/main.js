@@ -16,7 +16,8 @@ app.get('/', (req, res) => {
       "Path": "/lines",
       "Description": "Return list of pickup lines. Use ?page=.. for more"
     }
-  ]})
+  ],
+  message: "Deployment test!"})
 })
 
 app.get('/line/random', (req, res) => {
