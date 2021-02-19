@@ -10,7 +10,11 @@ function getRand(min, max) {
 
 module.exports = {
     getRandomPickupLine: () => {
-        return lines[getRand(0, lines.length)]
+        var line = null;
+        do {
+            line = lines[getRand(0, lines.length)];
+        } while(line == null);
+        return line;
     },
     getPickupLineById: (id) => {
         var line = null;
