@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
       "Description": "Return list of pickup lines. Use ?page=.. for more"
     }
   ],
-  message: "Deployment test!"})
+  message: "Deployment test 2!"})
 })
 
 app.get('/line/random', (req, res) => {
