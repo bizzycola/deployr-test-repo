@@ -1,5 +1,5 @@
 let lines = require('./data/pickupLines.json')
-let negLines = releaseEvents('./data/putdownLines.json');
+let negLines = require('./data/putdownLines.json');
 
 let page_size = 10;
 function getRand(min, max) {
