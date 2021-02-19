@@ -37,7 +37,7 @@ module.exports = {
         var line = null;
         var count = 0;
         do {
-            line = lines[getRand(0, negLines.length)];
+            line = negLines[getRand(0, negLines.length)];
 
             count++;
             if(count > 5)
