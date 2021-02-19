@@ -4,6 +4,11 @@
       "name": "NodeServer",
       "workingDir": "NodeJS/Server/",
       "dockerFile": "Dockerfile"
+    },
+    {
+      "name": "PickupLinesApi",
+      "workingDir": "NodeJS/PickupLines/",
+      "dockerFile": "Dockerfile"
     }
   ]
 }
