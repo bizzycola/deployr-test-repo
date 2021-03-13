@@ -33,6 +33,10 @@ module.exports = {
         return lines.slice((page = -1) * page_size, page * page_size);
     },
 
+    getPutdownLines: (page) => {
+        return negLines.slice((page = -1) * page_size, page * page_size);
+    },
+
     getRandomPutdownLine: () => {
         var line = null;
         var count = 0;

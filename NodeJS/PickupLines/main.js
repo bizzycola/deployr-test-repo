@@ -55,6 +55,14 @@ app.get('/lines', (req, res) => {
   })
 });
 
+app.get('/nlines', (req, res) => {
+  let page = (req.query.page) ? req.query.page: 1;
+  res.send({
+    success: true,
+    lines: lineApi.getPutdownLines(page)
+  })
+});
+
 app.listen(port, () => {
   console.log(`Pickup line API listening at http://localhost:${port}`)
 })
