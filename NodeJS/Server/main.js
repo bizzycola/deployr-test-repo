@@ -9,7 +9,7 @@ prompt.start()
 const greeting = `This is the bad dad joke command line app! Send h e l p`
 console.log(greeting)
 
-function run() {
+async function run() {
   const { val } = await prompt.get('Would you like to 1. Random Dad Joke, or 2. Search for a dad joke(enter number):')
   
   var url = '';
