@@ -23,8 +23,8 @@ async function run() {
 
     default: 
       console.log("Invalid option(1 or 2).");
-      continue;
-    break;
+      run();
+      return;
   }
 
   if (url == 'https://icanhazdadjoke.com/') {
