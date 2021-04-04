@@ -6,7 +6,7 @@ const axios = require('axios')
 const prompt = require('prompt')
 prompt.start()
 
-const greeting = `This is the bad dad joke CMD app!`
+const greeting = `This is the bad dad joke command line app! Send h e l p`
 console.log(greeting)
 
 function run() {
