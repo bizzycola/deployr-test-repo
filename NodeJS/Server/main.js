@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
-const yargs = require('yargs')
 const axios = require('axios')
-
 const prompt = require('prompt')
 prompt.start()
 
