@@ -1,5 +1,6 @@
 const express = require('express')
 const lineApi = require('./lineApi');
+const axios = require('axios');
 const app = express()
 const port = 3000
 
@@ -19,6 +20,16 @@ app.get('/', (req, res) => {
     }
   ],
   message: "Deployment test 6!"})
+})
+
+app.get('/dadjoke', async (req, res) => {
+  var joke = await axios.get('https://icanhazdadjoke.com/', {
+    headers: {
+      "Accept": "text/plain"
+    }
+  });
+
+  res.send(joke);
 })
 
 app.get('/line/random', (req, res) => {
