@@ -22,14 +22,17 @@ app.get('/', (req, res) => {
   message: "Deployment test 6!"})
 })
 
-app.get('/dadjoke', async (req, res) => {
-  var joke = await axios.get('https://icanhazdadjoke.com/', {
+app.get('/dadjoke', (req, res) => {
+  var joke = axios.get('https://icanhazdadjoke.com/', {
     headers: {
       "Accept": "text/plain"
     }
+  }).then((res) => {
+    res.send(joke);
+  })
+  .catch((err) => {
+    res.json({success: false, error: err});
   });
-
-  res.send(joke);
 })
 
 app.get('/line/random', (req, res) => {
