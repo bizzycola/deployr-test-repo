@@ -69,7 +69,7 @@ app.get('/dadjoke', async (req, res) => {
   }
 })
 
-app.get('/line/random', (req, res) => {
+app.get('/line/random', async (req, res) => {
   await updateKeyCount('pickupLineRequests');
 
   res.send({
@@ -77,7 +77,7 @@ app.get('/line/random', (req, res) => {
     line: lineApi.getRandomPickupLine(),
   });
 })
-app.get('/nline/random', (req, res) => {
+app.get('/nline/random', async (req, res) => {
   await updateKeyCount('putdownLineRequests');
 
   res.send({
@@ -86,12 +86,12 @@ app.get('/nline/random', (req, res) => {
   })
 })
 
-app.get('/text/line/random', (req, res) => {
+app.get('/text/line/random', async (req, res) => {
   await updateKeyCount('pickupLineRequests');
 
   res.send(lineApi.getRandomPickupLine().line)
 })
-app.get('/text/nline/random', (req, res) => {
+app.get('/text/nline/random', async (req, res) => {
   await updateKeyCount('putdownLineRequests');
 
   res.send(lineApi.getRandomPutdownLine().line)
