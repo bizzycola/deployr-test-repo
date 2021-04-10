@@ -5,7 +5,8 @@
   "main": "main.js",
   "dependencies": {
     "axios": "^0.21.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "jsoning": "^0.10.21"
   },
   "devDependencies": {},
   "scripts": {

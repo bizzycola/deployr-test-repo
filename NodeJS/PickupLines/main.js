@@ -1,30 +1,24 @@
 const express = require('express')
 const lineApi = require('./lineApi')
 const axios = require('axios')
-var path = require('path')
-const app = express()
-const port = 3000
+const jsoning = require("jsoning");
+const path = require('path');
+
+const app = express();
+const port = 3000;
+
+const db = new jsoning("/dbdata/db.json");
+
+async function updateKeyCount(key) {
+  try {
+    if(db.has(key))
+      db.math(key, 'add', 1);
+    else
+      db.set(key, 1);
+  } catch(err){ console.log(err); }
+}
 
 app.get('/', (req, res) => {
-  console.log('got /')
-  /*res.send({
-    success: true,
-    endpoints: [
-      {
-        Path: '/line/random',
-        Description: 'Returns a random pickup line',
-      },
-      {
-        Path: '/line/{id}',
-        Description: 'Return a specific pickup line by ID',
-      },
-      {
-        Path: '/lines',
-        Description: 'Return list of pickup lines. Use ?page=.. for more',
-      },
-    ],
-    message: 'Deployment test 6!',
-  })*/
   res.sendFile(path.join(__dirname + '/public/index.html'));
 })
 
@@ -53,12 +47,16 @@ app.get('/dadjoke', async (req, res) => {
 })
 
 app.get('/line/random', (req, res) => {
+  updateKeyCount('pickupLineRequests');
+
   res.send({
     success: true,
     line: lineApi.getRandomPickupLine(),
-  })
+  });
 })
 app.get('/nline/random', (req, res) => {
+  updateKeyCount('putdownLineRequests');
+
   res.send({
     success: true,
     line: lineApi.getRandomPutdownLine(),
@@ -66,9 +64,13 @@ app.get('/nline/random', (req, res) => {
 })
 
 app.get('/text/line/random', (req, res) => {
+  updateKeyCount('pickupLineRequests');
+
   res.send(lineApi.getRandomPickupLine().line)
 })
 app.get('/text/nline/random', (req, res) => {
+  updateKeyCount('putdownLineRequests');
+
   res.send(lineApi.getRandomPutdownLine().line)
 })
 
