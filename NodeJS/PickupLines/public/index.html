@@ -87,6 +87,26 @@
               </h2>
               <p class="leading-relaxed">Putdown Lines</p>
             </div>
+
+            <div class="p-4 sm:w-1/4 w-1/2">
+                <h2
+                  class="title-font font-medium sm:text-4xl text-3xl text-white"
+                  id="pickupReqCount"
+                >
+                  {{}}
+                </h2>
+                <p class="leading-relaxed">Pickup Lines Served</p>
+              </div>
+
+              <div class="p-4 sm:w-1/4 w-1/2">
+                <h2
+                  class="title-font font-medium sm:text-4xl text-3xl text-white"
+                  id="putdownReqCount"
+                >
+                  {{}}
+                </h2>
+                <p class="leading-relaxed">Putdown Lines Served</p>
+              </div>
           </div>
         </div>
       </section>
@@ -94,14 +114,16 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-      const loadDiv = document.getElementById('loadingContent')
-      const pageDiv = document.getElementById('pageContent')
+      const loadDiv = document.getElementById('loadingContent');
+      const pageDiv = document.getElementById('pageContent');
 
-      const lineType = document.getElementById('lineType')
-      const lineData = document.getElementById('lineText')
+      const lineType = document.getElementById('lineType');
+      const lineData = document.getElementById('lineText');
 
-      const pickupCount = document.getElementById('pickupCount')
-      const putdownCount = document.getElementById('putdownCount')
+      const pickupCount = document.getElementById('pickupCount');
+      const putdownCount = document.getElementById('putdownCount');
+      const putdownReqCount = document.getElementById('putdownReqCount');
+      const pickupReqCount = document.getElementById('pickupReqCount');
 
       function getPickupLine() {
         setLoading(true)
@@ -132,9 +154,12 @@
         lineData.innerText = line
         lineType.innerText = type
       }
-      function setStats(pickup, putdown) {
+      function setStats(pickup, putdown, pickupReq, putdownReq) {
         pickupCount.innerText = pickup
         putdownCount.innerText = putdown
+
+        pickupReqCount.innerText = pickupReq;
+        putdownReqCount.innerText = putdownReq;
       }
 
       function setLoading(loading) {
@@ -153,7 +178,7 @@
           .then((data) => {
             var info = data.data
             setLine('Pickup', info.line.line)
-            setStats(info.numPickupLines, info.numPutdownLines)
+            setStats(info.numPickupLines, info.numPutdownLines, info.pickupRequests, info.putdownRequests)
             setLoading(false)
           })
           .catch((err) => {

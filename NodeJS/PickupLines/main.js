@@ -18,8 +18,25 @@ async function updateKeyCount(key) {
   } catch(err){ console.log(err); }
 }
 
+async function getKeyCount(key) {
+  var count = 0;
+
+  if(db.has(key))
+    count = parseInt(await db.get(key));
+
+  return count;
+}
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
+})
+
+app.get('/stats', async (req, res) => {
+  res.send({
+    success: true,
+    pickupRequests: await getKeyCount('pickupLineRequests'),
+    putdownRequests: await getKeyCount('putdownLineRequests')
+  })
 })
 
 app.get('/viewInitial', async (req, res) => {
@@ -27,7 +44,9 @@ app.get('/viewInitial', async (req, res) => {
     success: true,
     line: lineApi.getRandomPickupLine(),
     numPickupLines: lineApi.getPickupLineCount(),
-    numPutdownLines: lineApi.getPutdownLineCount()
+    numPutdownLines: lineApi.getPutdownLineCount(),
+    pickupRequests: await getKeyCount('pickupLineRequests'),
+    putdownRequests: await getKeyCount('putdownLineRequests')
   })
 })
 
