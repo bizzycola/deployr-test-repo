@@ -1,12 +1,13 @@
 const express = require('express')
 const lineApi = require('./lineApi')
 const axios = require('axios')
+var path = require('path')
 const app = express()
 const port = 3000
 
 app.get('/', (req, res) => {
   console.log('got /')
-  res.send({
+  /*res.send({
     success: true,
     endpoints: [
       {
@@ -23,6 +24,16 @@ app.get('/', (req, res) => {
       },
     ],
     message: 'Deployment test 6!',
+  })*/
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+})
+
+app.get('/viewInitial', async (req, res) => {
+  res.send({
+    success: true,
+    line: lineApi.getRandomPickupLine(),
+    numPickupLines: lineApi.getPickupLineCount(),
+    numPutdownLines: lineApi.getPutdownLineCount()
   })
 })
 

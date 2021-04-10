@@ -14,6 +14,13 @@ function getRand(min, max) {
 }
 
 module.exports = {
+    getPickupLineCount: () => {
+        return lines.length;
+    },
+    getPutdownLineCount: () => {
+        return negLines.length;
+    },
+
     getRandomPickupLine: () => {
         /*var line = null;
         var count = 0;

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pickup Lines</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .loadicon {
+        top: calc(50vh-85px);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-900">
+    <section class="text-gray-400 bg-gray-900 body-font" id="loadingContent">
+      <div
+        class="container mx-auto flex px-5 py-24 items-center justify-center flex-col"
+      >
+        <div class="text-center lg:w-2/3 w-full">
+          <p class="leading-relaxed mb-8" id="lineData">
+            <i
+              class="fas fa-circle-notch fa-spin fa-5x loadicon text-green-500 opacity-75"
+            ></i>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div id="pageContent" class="hidden">
+      <section class="text-gray-400 bg-gray-900 body-font">
+        <div
+          class="container mx-auto flex px-5 py-24 items-center justify-center flex-col"
+        >
+          <div class="text-center lg:w-2/3 w-full">
+            <h1
+              class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white"
+            >
+              <span id="lineType">{{lineType}}</span>
+              Line
+            </h1>
+            <p class="leading-relaxed mb-8">
+              <span id="lineText">{{line}}</span>
+            </p>
+            <div class="flex justify-center">
+              <button
+                class="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg"
+                onclick="getPutdownLine()"
+              >
+                Putdown
+              </button>
+              <button
+                class="ml-4 inline-flex text-white bg-green-800 border-0 py-2 px-6 focus:outline-none hover:bg-green-700 hover:text-white rounded text-lg"
+                onclick="getPickupLine()"
+              >
+                Pickup
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="text-gray-400 bg-gray-900 body-font">
+        <div class="container px-5 py-24 mx-auto">
+          <div
+            class="flex flex-wrap -m-4 text-center items-center justify-center"
+          >
+            <div class="p-4 sm:w-1/4 w-1/2">
+              <h2
+                class="title-font font-medium sm:text-4xl text-3xl text-white"
+                id="pickupCount"
+              >
+                {{}}
+              </h2>
+              <p class="leading-relaxed">Pickup Lines</p>
+            </div>
+            <div class="p-4 sm:w-1/4 w-1/2">
+              <h2
+                class="title-font font-medium sm:text-4xl text-3xl text-white"
+                id="putdownCount"
+              >
+                {{}}
+              </h2>
+              <p class="leading-relaxed">Putdown Lines</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      const loadDiv = document.getElementById('loadingContent')
+      const pageDiv = document.getElementById('pageContent')
+
+      const lineType = document.getElementById('lineType')
+      const lineData = document.getElementById('lineText')
+
+      const pickupCount = document.getElementById('pickupCount')
+      const putdownCount = document.getElementById('putdownCount')
+
+      function getPickupLine() {
+        setLoading(true)
+        axios
+          .get('/line/random')
+          .then((res) => {
+            setLine('Pickup', res.data.line.line)
+            setLoading(false)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
+      function getPutdownLine() {
+        setLoading(true)
+        axios
+          .get('/nline/random')
+          .then((res) => {
+            setLine('Putdown', res.data.line.line)
+            setLoading(false)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
+
+      function setLine(type, line) {
+        lineData.innerText = line
+        lineType.innerText = type
+      }
+      function setStats(pickup, putdown) {
+        pickupCount.innerText = pickup
+        putdownCount.innerText = putdown
+      }
+
+      function setLoading(loading) {
+        if (loading) {
+          loadDiv.classList.remove('hidden')
+          pageDiv.classList.add('hidden')
+        } else {
+          loadDiv.classList.add('hidden')
+          pageDiv.classList.remove('hidden')
+        }
+      }
+
+      function loadInitial() {
+        axios
+          .get('/viewInitial')
+          .then((data) => {
+            var info = data.data
+            setLine('Pickup', info.line.line)
+            setStats(info.numPickupLines, info.numPutdownLines)
+            setLoading(false)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
+      loadInitial()
+    </script>
+  </body>
+</html>
