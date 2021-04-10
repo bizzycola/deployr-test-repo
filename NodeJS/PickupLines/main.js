@@ -7,15 +7,15 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
-//const db = new jsoning("/dbdata/db.json");
+const db = new jsoning("/dbdata/db.json");
 
 async function updateKeyCount(key) {
-  /*try {
+  try {
     if(db.has(key))
       db.math(key, 'add', 1);
     else
       db.set(key, 1);
-  } catch(err){ console.log(err); }*/
+  } catch(err){ console.log(err); }
 }
 
 app.get('/', (req, res) => {
