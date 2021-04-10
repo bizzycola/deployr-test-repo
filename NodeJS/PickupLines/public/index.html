@@ -131,6 +131,7 @@
           .get('/line/random')
           .then((res) => {
             setLine('Pickup', res.data.line.line)
+            incrementStat('pickup')
             setLoading(false)
           })
           .catch((err) => {
@@ -143,11 +144,22 @@
           .get('/nline/random')
           .then((res) => {
             setLine('Putdown', res.data.line.line)
+            incrementStat('putdown')
             setLoading(false)
           })
           .catch((err) => {
             console.log(err)
           })
+      }
+
+      function incrementStat(stat){
+          if(stat == 'pickup') {
+              var cur = parseInt(pickupReqCount.innerText);
+              pickupReqCount.innerText = cur+1;
+          } else if(stat == 'putdown') {
+            var cur = parseInt(putdownReqCount.innerText);
+              pickupReqCount.innerText = cur+1;
+          }
       }
 
       function setLine(type, line) {
