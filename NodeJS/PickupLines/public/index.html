@@ -204,6 +204,7 @@
                 var data = res.data;
                 if(!data.success) return;
 
+                console.log(data);
                 setStats(data.pickupRequests, data.putdownRequests);
             })
             .catch((err) => console.log(err));
