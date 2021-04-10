@@ -11,10 +11,10 @@ const db = new jsoning("/dbdata/db.json");
 
 async function updateKeyCount(key) {
   try {
-    if(db.has(key))
-      db.math(key, 'add', 1);
+    if(await db.has(key))
+      await db.math(key, 'add', 1);
     else
-      db.set(key, 1);
+      await db.set(key, 1);
   } catch(err){ console.log(err); }
 }
 
@@ -37,6 +37,10 @@ app.get('/stats', async (req, res) => {
     pickupRequests: await getKeyCount('pickupLineRequests'),
     putdownRequests: await getKeyCount('putdownLineRequests')
   })
+})
+
+app.get('/statsFile', (req, res) => {
+  res.sendFile('/dbdata/db.json')
 })
 
 app.get('/viewInitial', async (req, res) => {
