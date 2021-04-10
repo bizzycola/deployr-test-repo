@@ -21,7 +21,7 @@ async function updateKeyCount(key) {
 async function getKeyCount(key) {
   var count = 0;
 
-  if(db.has(key))
+  if(await db.has(key))
     count = parseInt(await db.get(key));
 
   return count;
