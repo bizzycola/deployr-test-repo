@@ -197,6 +197,18 @@
         putdownReqCount.innerText = abbrNum(putdownReq, 0)
       }
 
+      setInterval(() => {
+        axios
+            .get('/stats')
+            .then((res) => {
+                var data = res.data;
+                if(!data.success) return;
+
+                setStats(data.pickupRequests, data.putdownRequests);
+            })
+            .catch((err) => console.log(err));
+      }, 5000)
+
       function setLoading(loading) {
         if (loading) {
           loadDiv.classList.remove('hidden')
