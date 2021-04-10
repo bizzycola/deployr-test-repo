@@ -204,8 +204,8 @@
                 var data = res.data;
                 if(!data.success) return;
 
-                console.log(data);
-                setStats(data.pickupRequests, data.putdownRequests);
+                pickupReqCount.innerText = abbrNum(parseInt(data.pickupRequests), 0)
+                putdownReqCount.innerText = abbrNum(parseInt(data.putdownRequests), 0)
             })
             .catch((err) => console.log(err));
       }, 5000)
