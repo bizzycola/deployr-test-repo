@@ -86,6 +86,10 @@ app.get('/nline/random', async (req, res) => {
   })
 })
 
+app.get('/text/fact/random', (req, res) => {
+  res.send(lineApi.getRandomFact().line);
+})
+
 app.get('/text/line/random', async (req, res) => {
   await updateKeyCount('pickupLineRequests');
 

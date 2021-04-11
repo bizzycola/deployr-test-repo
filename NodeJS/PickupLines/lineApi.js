@@ -1,10 +1,12 @@
 let lines = require('./data/pickupLines.json')
 let negLines = require('./data/putdownLines.json');
+let facts = require('./data/weirdFacts.json');
 let QueueRand = require('./queueRand.js')
 //import { QueueRand } from './queueRand';
 
 var pickupQueue = new QueueRand(lines, "id", 15);
 var putdownQueue = new QueueRand(negLines);
+var factQueue = new QueueRand(facts);
 
 let page_size = 10;
 function getRand(min, max) {
@@ -21,18 +23,11 @@ module.exports = {
         return negLines.length;
     },
 
+    getRandomFact: () => {
+        return factQueue.getRandomItem();
+    },
+
     getRandomPickupLine: () => {
-        /*var line = null;
-        var count = 0;
-        do {
-            line = lines[getRand(0, lines.length)];
-
-            count++;
-            if(count > 5)
-                return {id: -1, line: "Sorry, we couldn't find you a pickup line! Perhas something broke?"};
-        } while(line == null);
-        return line;*/
-
         return pickupQueue.getRandomItem();
     },
     getPickupLineById: (id) => {
