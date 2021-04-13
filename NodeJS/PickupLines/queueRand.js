@@ -7,12 +7,12 @@ function getRand(min, max) {
  * Random item selection with reduced repeats
  */
 module.exports = class QueueRand {
-    /**
-     * 
-     * @param {Array of identifiable objects to pick from} data 
-     * @param {Name of the ID field for each item} idAttr 
-     * @param {Number of items to hold on to for repeat reduction} maxArrLen 
-     */
+  /**
+   *
+   * @param {Array of identifiable objects to pick from} data
+   * @param {Name of the ID field for each item} idAttr
+   * @param {Number of items to hold on to for repeat reduction} maxArrLen
+   */
   constructor(data, idAttr, maxArrLen) {
     this.maxArrLen = maxArrLen || 10
     this.idAttr = idAttr || 'id'
@@ -26,7 +26,15 @@ module.exports = class QueueRand {
       return Array.prototype.push.apply(this, arguments)
     }
 
-    this.queue = arr
+    this.queue = this.shuffle(arr)
+  }
+
+  shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[a[i], a[j]] = [a[j], a[i]]
+    }
+    return a
   }
 
   /**
@@ -54,7 +62,7 @@ module.exports = class QueueRand {
       if (this.queue[i].id == id) {
         inQueue = true
 
-        var rnd = Math.random()*100;
+        var rnd = Math.random() * 100
         if (rnd <= 25) {
           return this.getRandomItem()
         }
