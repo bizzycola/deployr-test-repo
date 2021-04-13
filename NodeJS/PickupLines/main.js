@@ -114,6 +114,10 @@ app.get('/text/line/:id', async (req, res) => {
   res.send(lineApi.getPickupLineById(req.params.id).line)
 })
 
+app.get('/text/pun/random', async (req, res) => {
+  res.send(lineApi.getRandomPun().line)
+})
+
 app.get('/lines', (req, res) => {
   let page = req.query.page ? req.query.page : 1
   res.send({

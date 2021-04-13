@@ -1,11 +1,13 @@
 let lines = require('./data/pickupLines.json')
 let negLines = require('./data/putdownLines.json');
 let facts = require('./data/weirdFacts.json');
+let puns = require('./data/puns.json');
 let QueueRand = require('./queueRand.js')
 
 var pickupQueue = new QueueRand(lines, "id", 15);
 var putdownQueue = new QueueRand(negLines);
 var factQueue = new QueueRand(facts, "id", 15);
+var punQueue = new QueueRand(puns, "id", 15);
 
 let page_size = 10;
 function getRand(min, max) {
@@ -47,5 +49,9 @@ module.exports = {
 
     getRandomPutdownLine: () => {
         return putdownQueue.getRandomItem();
+    },
+
+    getRandomPun: () => {
+        return punQueue.getRandomItem();
     }
 } 
