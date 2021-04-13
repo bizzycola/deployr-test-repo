@@ -402,5 +402,13 @@
     {
         "id": 100,
         "line": "What does a clock do when it’s hungry? It goes back for seconds."
+    },
+    {
+        "id": 101,
+        "line": "Gamers and famous musicians have one complaint in common. The fans are way too noisy."
+    },
+    {
+        "id": 102,
+        "line": "I tried to go to a bar in Minecraft. The bartender wouldn't let me order a drink, he said they don't serve miners."
     }
 ]
