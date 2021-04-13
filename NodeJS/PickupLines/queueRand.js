@@ -54,7 +54,8 @@ module.exports = class QueueRand {
       if (this.queue[i].id == id) {
         inQueue = true
 
-        if (getRand(1, 2) == 1) {
+        var rnd = Math.random()*100;
+        if (rnd <= 25) {
           return this.getRandomItem()
         }
       }
