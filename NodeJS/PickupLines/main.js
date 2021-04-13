@@ -107,6 +107,9 @@ app.get('/line/:id', (req, res) => {
     line: lineApi.getPickupLineById(req.params.id),
   })
 })
+app.get('/text/line/:id', (req, res) => {
+  res.send(lineApi.getPickupLineById(req.params.id).line)
+})
 
 app.get('/lines', (req, res) => {
   let page = req.query.page ? req.query.page : 1
