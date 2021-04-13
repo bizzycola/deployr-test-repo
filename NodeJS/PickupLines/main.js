@@ -44,6 +44,7 @@ app.get('/statsFile', (req, res) => {
 })
 
 app.get('/viewInitial', async (req, res) => {
+  await updateKeyCount('pickupLineRequests');
   res.send({
     success: true,
     line: lineApi.getRandomPickupLine(),
@@ -102,12 +103,14 @@ app.get('/text/nline/random', async (req, res) => {
 })
 
 app.get('/line/:id', (req, res) => {
+  await updateKeyCount('pickupLineRequests');
   res.send({
     success: true,
     line: lineApi.getPickupLineById(req.params.id),
   })
 })
 app.get('/text/line/:id', (req, res) => {
+  await updateKeyCount('pickupLineRequests');
   res.send(lineApi.getPickupLineById(req.params.id).line)
 })
 
