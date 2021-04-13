@@ -102,14 +102,14 @@ app.get('/text/nline/random', async (req, res) => {
   res.send(lineApi.getRandomPutdownLine().line)
 })
 
-app.get('/line/:id', (req, res) => {
+app.get('/line/:id', async (req, res) => {
   await updateKeyCount('pickupLineRequests');
   res.send({
     success: true,
     line: lineApi.getPickupLineById(req.params.id),
   })
 })
-app.get('/text/line/:id', (req, res) => {
+app.get('/text/line/:id', async (req, res) => {
   await updateKeyCount('pickupLineRequests');
   res.send(lineApi.getPickupLineById(req.params.id).line)
 })
