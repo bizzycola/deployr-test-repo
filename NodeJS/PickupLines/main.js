@@ -87,6 +87,12 @@ app.get('/nline/random', async (req, res) => {
   })
 })
 
+app.get('/fact/random', (req, res) => {
+  res.send({
+    success: true,
+    line: lineApi.getRandomFact()
+  })
+})
 app.get('/text/fact/random', (req, res) => {
   res.send(lineApi.getRandomFact().line);
 })
@@ -114,8 +120,14 @@ app.get('/text/line/:id', async (req, res) => {
   res.send(lineApi.getPickupLineById(req.params.id).line)
 })
 
-app.get('/text/pun/random', async (req, res) => {
+app.get('/text/pun/random', (req, res) => {
   res.send(lineApi.getRandomPun().line)
+})
+app.get('/pun/random', (req, res) => {
+  res.send({
+    success: true,
+    line: lineApi.getRandomPun()
+  })
 })
 
 app.get('/lines', (req, res) => {
