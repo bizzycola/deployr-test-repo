@@ -6,8 +6,8 @@
       "dockerFile": "Dockerfile"
     },
     {
-      "name": "NodeServer2",
-      "workingDir": "NodeJS/Server2/",
+      "name": "SecondServer",
+      "workingDir": "NodeJS/SecondServ/",
       "dockerFile": "Dockerfile"
     },
     {
